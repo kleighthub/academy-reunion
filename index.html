@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academy Reunion</title>
+  <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+  <link rel="icon" href="assets/favicons/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicons/favicon-512.png">
+  <link rel="apple-touch-icon" href="assets/favicons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=12">
+</head>
+<body>
+<div class="site">
+
+  <!-- Banner: assets/banner-home.png (2360 x 472, 5:1). A page can override it with data-banner on its section. -->
+  <div class="banner"><img src="assets/banner-home.png" alt="Academy 25-ish Year Reunion: a retro desktop window reading “Reconnecting anyone from 2000–2002… 25-ish years remaining”">
+    <a class="banner-rsvp" href="#rsvp" aria-label="RSVP"></a>
+    <button class="banner-music" type="button" aria-label="Play Area Codes by Ludacris"></button>
+  </div>
+
+  <!-- HOME: numbered tiles -->
+  <div class="home" id="home">
+    <div class="tiles">
+        <a class="tile" href="#details"><span class="tnum">Pay attention</span><span class="tname serif">Event Details</span><span class="tarrow" aria-hidden="true">→</span></a>
+        <a class="tile" href="#rsvp"><span class="tnum">You should</span><span class="tname serif">RSVP</span><span class="tarrow" aria-hidden="true">→</span></a>
+        <a class="tile" href="#venue"><span class="tnum">Bougie</span><span class="tname serif">Venue &amp; Menu</span><span class="tarrow" aria-hidden="true">→</span></a>
+        <a class="tile" href="#attendees"><span class="tnum" data-count="#attendees .person">&nbsp;</span><span class="tname serif">Attendees</span><span class="tarrow" aria-hidden="true">→</span></a>
+        <a class="tile" href="#shenanigans"><span class="tnum">Submit your</span><span class="tname serif">Shenanigans</span><span class="tarrow" aria-hidden="true">→</span></a>
+        <a class="tile" href="#faq"><span class="tnum">Read the</span><span class="tname serif">FAQ</span><span class="tarrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <!-- INNER PAGES: tab bar + panels -->
+  <div class="inner" id="inner" hidden>
+    <nav class="tabbar" aria-label="Sections">
+      <a class="tab homebtn" href="#">← Home</a>
+      <a class="tab" href="#details">Event Details</a>
+      <a class="tab" href="#rsvp">RSVP</a>
+      <a class="tab" href="#venue">Venue &amp; Menu</a>
+      <a class="tab" href="#attendees">Attendees</a>
+      <a class="tab" href="#shenanigans">Shenanigans</a>
+      <a class="tab" href="#faq">FAQ</a>
+    </nav>
+    <div class="wrap">
+
+      <!-- 01 EVENT DETAILS -->
+      <section class="panel" id="details">
+        <h2 class="ptitle serif">Event Details</h2>
+        <p class="intro">Twenty-five(ish) years later, the Advanced Academy of Georgia is getting the band back together. Here's the plan.</p>
+        <div class="two">
+          <div class="card">
+            <p class="h3 serif">When</p>
+            <p class="addr serif">Friday, June 11 – Sunday, June 13, 2027</p>
+            <dl class="dl">
+              <dt>Kickoff</dt><dd>Friday, 7:00 PM</dd>
+              <dt>Main event</dt><dd>Saturday, Noon – 4:00 PM</dd>
+              <dt>Wrap-up</dt><dd>Sunday, 10:00 AM</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <p class="h3 serif">Where</p>
+            <p class="addr serif">SkyLounge at Glenn<br>110 Marietta St NW, Atlanta, GA 30303</p>
+            <div class="btns">
+              <a class="obtn" href="#venue">Venue &amp; Menu details</a>
+            </div>
+            <dl class="dl">
+              <dt>Dress code</dt><dd>Smart casual</dd>
+              <dt>Bring</dt><dd>Old photos and good stories</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="day">
+          <div class="daytag"><div class="dnum serif">Fri</div><div class="ddow">June 11</div></div>
+          <div class="sess">
+            <div class="srow">
+              <div class="stime">7:00 – 10:00 PM</div>
+              <div>
+                <div class="sname">Welcome drinks</div>
+                <div class="smeta"><span>Where</span> Downtown Atlanta, details to come</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="daytag"><div class="dnum serif">Sat</div><div class="ddow">June 12</div></div>
+          <div class="sess">
+            <div class="srow">
+              <div class="stime">2:00 – 4:00 PM</div>
+              <div>
+                <div class="sname">Campus walk</div>
+                <div class="smeta"><span>Where</span> Meet at the old dorms</div>
+              </div>
+            </div>
+            <div class="srow">
+              <div class="stime">Noon – 4:00 PM</div>
+              <div>
+                <div class="sname">Reunion dinner &amp; party</div>
+                <div class="smeta"><span>Where</span> SkyLounge at Glenn</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="daytag"><div class="dnum serif">Sun</div><div class="ddow">June 13</div></div>
+          <div class="sess">
+            <div class="srow">
+              <div class="stime">10:00 AM – 12:00 PM</div>
+              <div>
+                <div class="sname">Farewell brunch</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 RSVP -->
+      <section class="panel" id="rsvp">
+        <h2 class="ptitle serif">RSVP</h2>
+        <p class="intro">Lorem ipsum dolor sit amet. Please respond by Month DD, 20XX.</p>
+        <!--
+          RSVP SETUP: replace YOUR_FORM_ID below with your Formspree form ID
+          (free at https://formspree.io). See README.md.
+        -->
+        <form class="card rsvp-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="field-row">
+            <label>First name<input name="first_name" required autocomplete="given-name"></label>
+            <label>Last name<input name="last_name" required autocomplete="family-name"></label>
+          </div>
+          <div class="field-row">
+            <label>Email<input type="email" name="email" required autocomplete="email"></label>
+            <label>Last name at the Academy (if different)<input name="maiden_name"></label>
+          </div>
+          <fieldset>
+            <legend>Will you attend?</legend>
+            <label class="inline"><input type="radio" name="attending" value="yes" required> Yes</label>
+            <label class="inline"><input type="radio" name="attending" value="no"> No</label>
+            <label class="inline"><input type="radio" name="attending" value="maybe"> Maybe</label>
+          </fieldset>
+          <label>Number in your party (including you)
+            <select name="party_size"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          </label>
+          <label>Share a memory or shenanigan (optional)<textarea name="memory" rows="4" placeholder="That time we…"></textarea></label>
+          <label>Anything we should know?<textarea name="notes" rows="4"></textarea></label>
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="sbtn" type="submit">Send RSVP</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- 03 VENUE & MENU -->
+      <section class="panel" id="venue" data-banner="assets/venue/venue-feature-wide.jpg" data-banner-alt="SkyLounge at Glenn rooftop seating with the Atlanta skyline" data-banner-pos="center 50%">
+        <h2 class="ptitle serif">Venue &amp; Menu</h2>
+        <div class="two">
+          <div class="card">
+            <p class="h3 serif">SkyLounge</p>
+            <p class="addr serif">Rooftop of Glenn Hotel<br>110 Marietta St NW<br>Atlanta, GA 30303</p>
+            <div class="btns">
+              <a class="obtn" href="https://www.google.com/maps/search/?api=1&amp;query=Glenn+Hotel+110+Marietta+St+NW+Atlanta+GA+30303" target="_blank" rel="noopener">Open in Google Maps</a>
+              <a class="obtn" href="https://maps.apple.com/?q=Glenn+Hotel&amp;address=110+Marietta+St+NW,+Atlanta,+GA+30303" target="_blank" rel="noopener">Open in Apple Maps</a>
+            </div>
+            <dl class="dl">
+              <dt>When</dt><dd>Saturday, June 12 · Noon – 4:00 PM</dd>
+              <dt>Website</dt><dd><a href="https://www.marriott.com/en-us/dining/restaurant-bar/atlak-glenn-hotel-autograph-collection/5172236-skylounge-at-glenn.mi" target="_blank" rel="noopener">SkyLounge at Glenn</a></dd>
+            </dl>
+          </div>
+          <img class="cardimg" src="assets/venue/venue-main-web.jpg" alt="SkyLounge at Glenn: lounge seating on the rooftop terrace with city views" style="object-position: 85% 100%">
+        </div>
+        <div class="gallery">
+          <img src="assets/venue/venue-bar-web.jpg" alt="The SkyLounge bar" loading="lazy">
+          <img src="assets/venue/venue-seating-web.jpg" alt="Lounge seating with city views" loading="lazy">
+          <img src="assets/venue/venue-deck-web.jpg" alt="Rooftop deck at dusk with the Atlanta skyline" loading="lazy">
+          <img src="assets/venue/venue-banner.webp" alt="SkyLounge sign and seating area at dusk" loading="lazy">
+        </div>
+        <h2 class="ptitle serif menu-title">Menu</h2>
+        <p class="menu-sub">Fully catered food and drinks included.</p>
+        <div class="two">
+          <div class="card">
+            <p class="h3 serif">Food</p>
+            <p class="lead">Details coming soon.</p>
+          </div>
+          <div class="card">
+            <p class="h3 serif">Drinks</p>
+            <p class="lead">Details coming soon.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 ATTENDEES -->
+      <section class="panel" id="attendees">
+        <h2 class="ptitle serif">Attendees</h2>
+        <div class="group">
+          <p class="h3 serif">Lorem Ipsum Class</p>
+          <div class="people">
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+          </div>
+        </div>
+        <div class="group">
+          <p class="h3 serif">Dolor Sit Class</p>
+          <div class="people">
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 SHENANIGANS: memories and photos from classmates -->
+      <section class="panel" id="shenanigans">
+        <h2 class="ptitle serif">Shenanigans</h2>
+        <p class="intro">Stories, photos and questionable decisions from our Academy days. Share yours with your RSVP.</p>
+        <div class="memories">
+          <figure class="memory card">
+            <img src="assets/placeholder.svg" alt="Placeholder photo">
+            <blockquote>Remember the fire alarm at 3 AM, and everyone standing outside in towels? We still don't know who did it.</blockquote>
+            <figcaption>First Lastname</figcaption>
+          </figure>
+          <figure class="memory card">
+            <img src="assets/placeholder.svg" alt="Placeholder photo">
+            <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</blockquote>
+            <figcaption>First Lastname</figcaption>
+          </figure>
+          <figure class="memory card">
+            <img src="assets/placeholder.svg" alt="Placeholder photo">
+            <blockquote>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</blockquote>
+            <figcaption>First Lastname</figcaption>
+          </figure>
+          <figure class="memory card">
+            <img src="assets/placeholder.svg" alt="Placeholder photo">
+            <blockquote>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</blockquote>
+            <figcaption>First Lastname</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 06 FAQ (weather at the top) -->
+      <section class="panel" id="faq">
+        <h2 class="ptitle serif">FAQ</h2>
+        <p class="h3 serif">Weather</p>
+        <!--
+          LIVE WEATHER: set the venue's latitude/longitude and the event's first day (YYYY-MM-DD).
+          Forecasts load automatically from Open-Meteo (free, no key) once the event is within 16 days.
+          Until then, the cards below show as written.
+        -->
+        <div class="wxgrid" data-lat="33.757" data-lon="-84.393" data-start="2027-06-11" data-days="3">
+          <div class="wx"><div class="wd">FRI MM/DD</div><div class="wt serif">00°</div><div class="wc">Lorem ipsum</div><div class="wlo">Low 00° · 00% rain</div></div>
+          <div class="wx"><div class="wd">SAT MM/DD</div><div class="wt serif">00°</div><div class="wc">Lorem ipsum</div><div class="wlo">Low 00° · 00% rain</div></div>
+          <div class="wx"><div class="wd">SUN MM/DD</div><div class="wt serif">00°</div><div class="wc">Lorem ipsum</div><div class="wlo">Low 00° · 00% rain</div></div>
+        </div>
+        <p class="h3 serif faq-head">Questions</p>
+        <div class="faq">
+          <div class="qa">
+            <p class="q serif">Lorem ipsum dolor sit amet?</p>
+            <p class="a">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+          </div>
+          <div class="qa">
+            <p class="q serif">Ut enim ad minim veniam?</p>
+            <p class="a">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+          </div>
+          <div class="qa">
+            <p class="q serif">Duis aute irure dolor?</p>
+            <p class="a">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+          </div>
+          <div class="qa">
+            <p class="q serif">Excepteur sint occaecat cupidatat?</p>
+            <p class="a">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer class="foot">
+    <img class="logo" src="assets/heading.gif" width="150" height="80" alt="Animated heading: State University of West Georgia, Advanced Academy of Georgia reunion">
+  </footer>
+</div>
+<!-- Now-playing window for the banner's "Area Codes – Ludacris" tray item -->
+<div class="nowplaying" hidden>
+  <div class="np-bar"><span>🔊 Area Codes – Ludacris</span><button class="np-close" type="button" aria-label="Stop and close">×</button></div>
+  <div class="np-video"></div>
+</div>
+<script src="script.js?v=5"></script>
+</body>
+</html>
