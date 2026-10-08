@@ -25,11 +25,18 @@ a { color: inherit; }
 
 /* Centered "paper" column */
 .site { max-width: 1180px; margin: 0 auto; background: var(--paper); border-inline: 1px solid var(--line); }
-.banner { position: relative; border-bottom: 4px solid var(--accent); }
+.banner { position: relative; border-bottom: 4px solid var(--accent); container-type: inline-size; }
 /* Clickable hotspot over the RSVP button drawn in banner-home.png (hidden when a page swaps in its own banner) */
 .banner-rsvp { position: absolute; left: 57.3%; top: 70.8%; width: 6.8%; height: 10%; cursor: pointer; border-radius: 2px; }
 .banner-music { position: absolute; left: 86%; top: 88%; width: 13.6%; height: 10.5%; background: none; border: 0; padding: 0; cursor: pointer; }
-.banner.custom .banner-rsvp, .banner.custom .banner-music { display: none; }
+/* Live countdown painted over "25-ish years remaining." in banner-home.png.
+   Positions are the artwork's pixel coordinates (2360 x 472) as percentages, so it scales with the banner. */
+.banner-countdown {
+  position: absolute; left: calc(1268 / 2360 * 100%); top: calc(296.7 / 472 * 100%); width: calc(540 / 2360 * 100%);
+  font: 400 calc(24 / 2360 * 100cqw) / 1 Arial, Helvetica, sans-serif; color: #111; white-space: nowrap;
+  background: #c3c3c3; box-shadow: 0 0 0 calc(5 / 2360 * 100cqw) #c3c3c3; pointer-events: none;
+}
+.banner.custom .banner-rsvp, .banner.custom .banner-music, .banner.custom .banner-countdown { display: none; }
 
 /* Now-playing mini window (retro, to match the banner) */
 .nowplaying { position: fixed; right: 16px; bottom: 16px; z-index: 20; width: 320px; max-width: calc(100vw - 32px); background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff; box-shadow: 0 6px 24px rgba(0,0,0,.25); }

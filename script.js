@@ -45,6 +45,29 @@ document.querySelectorAll('.homebtn').forEach((a) => {
 });
 window.addEventListener('popstate', route);
 
+// Banner countdown to the reunion: months until June, then days, then day-of and after.
+const countdown = document.querySelector('.banner-countdown');
+function updateCountdown() {
+  const target = new Date(countdown.dataset.target);
+  const now = new Date();
+  const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+  let text;
+  if (now >= target) {
+    const sameDay = now.toDateString() === target.toDateString();
+    text = sameDay ? 'logging on today!' : 'connection established.';
+  } else if (now < new Date(target.getFullYear(), target.getMonth(), 1)) {
+    let months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
+    if (now.getDate() > target.getDate()) months -= 1;
+    text = `${plural(Math.max(1, months), 'month')} remaining.`;
+  } else {
+    const days = Math.ceil((target - now) / 86400000);
+    text = days <= 1 && now.toDateString() === target.toDateString() ? 'logging on today!' : `${plural(days, 'day')} remaining.`;
+  }
+  countdown.textContent = text;
+}
+updateCountdown();
+setInterval(updateCountdown, 60 * 60 * 1000);
+
 // Banner tray item "Area Codes – Ludacris": click to play the official track from YouTube; click again (or ×) to stop.
 const music = document.querySelector('.banner-music');
 const nowPlaying = document.querySelector('.nowplaying');
