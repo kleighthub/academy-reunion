@@ -68,6 +68,18 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 60 * 60 * 1000);
 
+// Easter egg: the banner's Start button opens Campus Quest in a full-screen overlay.
+document.querySelector('.egg-start').addEventListener('click', (e) => {
+  e.preventDefault();
+  if (document.querySelector('.egg-overlay')) return;
+  const f = document.createElement('iframe');
+  f.src = 'campus-game/index.html'; f.className = 'egg-overlay'; f.title = 'Campus Quest';
+  document.body.appendChild(f); f.focus();
+});
+addEventListener('message', (e) => {
+  if (e.origin === location.origin && e.data && e.data.type === 'campus-game:close') document.querySelector('.egg-overlay')?.remove();
+});
+
 // Banner tray item "Area Codes – Ludacris": click to play the official track from YouTube; click again (or ×) to stop.
 const music = document.querySelector('.banner-music');
 const nowPlaying = document.querySelector('.nowplaying');
@@ -83,6 +95,39 @@ music.addEventListener('click', () => {
   nowPlaying.hidden = false;
 });
 nowPlaying.querySelector('.np-close').addEventListener('click', stopMusic);
+
+// Photo viewer: click or tap a photo in a gallery to see it bigger; arrows, keys or swipe move through that gallery.
+// Each gallery is its own set: the venue photos, and the Academy Pix thumbnails (which open data-full when given).
+const lightbox = document.querySelector('.lightbox');
+const lbImg = lightbox.querySelector('.lb-img');
+let photos = [];
+let current = 0;
+function showPhoto(i) {
+  current = (i + photos.length) % photos.length;
+  const img = photos[current];
+  lbImg.src = img.dataset.full || img.currentSrc || img.src;
+  lbImg.alt = img.alt;
+}
+for (const selector of ['#venue .cardimg, #venue .gallery img', '#pix .pix-grid img']) {
+  const set = [...document.querySelectorAll(selector)];
+  set.forEach((img, i) => img.addEventListener('click', () => { photos = set; showPhoto(i); lightbox.showModal(); }));
+}
+lightbox.querySelector('.lb-close').addEventListener('click', () => lightbox.close());
+lightbox.querySelector('.lb-prev').addEventListener('click', () => showPhoto(current - 1));
+lightbox.querySelector('.lb-next').addEventListener('click', () => showPhoto(current + 1));
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close(); });
+lightbox.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') showPhoto(current - 1);
+  if (e.key === 'ArrowRight') showPhoto(current + 1);
+});
+let touchX = null;
+lightbox.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', (e) => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 40) showPhoto(current + (dx < 0 ? 1 : -1));
+  touchX = null;
+});
 
 // RSVP: submit to Formspree without leaving the page.
 const form = document.querySelector('.rsvp-form');
@@ -111,53 +156,3 @@ form.addEventListener('submit', async (e) => {
     button.disabled = false;
   }
 });
-
-// Live weather from Open-Meteo (free, no API key). Settings live on .wxgrid in index.html.
-(async () => {
-  const grid = document.querySelector('.wxgrid');
-  if (!grid) return;
-  const { lat, lon, start, days } = grid.dataset;
-  const first = new Date(start + 'T12:00:00');
-  const daysAway = (first - new Date()) / 86400000;
-  if (isNaN(daysAway) || daysAway > 15 || daysAway < -Number(days)) return; // outside the forecast window
-
-  const end = new Date(first);
-  end.setDate(end.getDate() + Number(days) - 1);
-  const iso = (d) => d.toISOString().slice(0, 10);
-  const url = 'https://api.open-meteo.com/v1/forecast'
-    + `?latitude=${lat}&longitude=${lon}&start_date=${start}&end_date=${iso(end)}`
-    + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
-    + '&temperature_unit=fahrenheit&timezone=auto';
-
-  const label = (code) => {
-    if (code === 0) return 'Clear';
-    if (code <= 2) return 'Partly cloudy';
-    if (code === 3) return 'Overcast';
-    if (code <= 48) return 'Fog';
-    if (code <= 57) return 'Drizzle';
-    if (code <= 67) return 'Rain';
-    if (code <= 77) return 'Snow';
-    if (code <= 82) return 'Showers';
-    return 'Thunderstorms';
-  };
-
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return;
-    const d = (await res.json()).daily;
-    const cards = grid.querySelectorAll('.wx');
-    d.time.forEach((t, i) => {
-      const card = cards[i];
-      if (!card) return;
-      const date = new Date(t + 'T12:00:00');
-      const dow = date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
-      card.querySelector('.wd').textContent = `${dow} ${date.getMonth() + 1}/${date.getDate()}`;
-      card.querySelector('.wt').textContent = `${Math.round(d.temperature_2m_max[i])}°`;
-      card.querySelector('.wc').textContent = label(d.weather_code[i]);
-      card.querySelector('.wlo').textContent =
-        `Low ${Math.round(d.temperature_2m_min[i])}° · ${d.precipitation_probability_max[i] ?? 0}% rain`;
-    });
-  } catch {
-    // Leave the written placeholders in place if the forecast can't load.
-  }
-})();
