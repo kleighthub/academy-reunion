@@ -97,7 +97,6 @@ music.addEventListener('click', () => {
 nowPlaying.querySelector('.np-close').addEventListener('click', stopMusic);
 
 // Photo viewer: click or tap a photo in a gallery to see it bigger; arrows, keys or swipe move through that gallery.
-// Each gallery is its own set: the venue photos, and the Academy Pix thumbnails (which open data-full when given).
 const lightbox = document.querySelector('.lightbox');
 const lbImg = lightbox.querySelector('.lb-img');
 let photos = [];
@@ -108,7 +107,7 @@ function showPhoto(i) {
   lbImg.src = img.dataset.full || img.currentSrc || img.src;
   lbImg.alt = img.alt;
 }
-for (const selector of ['#venue .cardimg, #venue .gallery img', '#pix .pix-grid img']) {
+for (const selector of ['#venue .cardimg, #venue .gallery img']) {
   const set = [...document.querySelectorAll(selector)];
   set.forEach((img, i) => img.addEventListener('click', () => { photos = set; showPhoto(i); lightbox.showModal(); }));
 }

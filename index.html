@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
 </head>
 <body>
 <div class="site">
@@ -112,6 +112,7 @@
             <label class="inline"><input type="radio" name="attending" value="maybe"> Maybe</label>
           </fieldset>
           <label>Share a memory or shenanigan (optional)<textarea name="memory" rows="4" placeholder="That time we…"></textarea></label>
+          <p class="form-hint">Have a photo to go with it? <a href="https://photos.app.goo.gl/zRSka3QCoRucrTJQA" target="_blank" rel="noopener">Add it to our shared Google Photos album</a>.</p>
           <label>Anything we should know?<textarea name="notes" rows="4"></textarea></label>
           <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="sbtn" type="submit">Send RSVP</button>
@@ -230,31 +231,16 @@
       </section>
 
       <!-- ACADEMY PIX: opened from the "Academy Pix" folder icon in the home banner (not in the tab bar).
-           Photos live in assets/academy-pix/. -->
+           The photos live in a shared Google Photos album (Google doesn't allow albums to be embedded, so we link to it). -->
       <section class="panel" id="pix">
         <h2 class="ptitle serif">Academy Pix</h2>
-        <p class="intro">Tap any photo to see it bigger.</p>
-        <div class="pix-grid">
-          <img src="assets/academy-pix/groupphoto.jpg" alt="Academy group photo" loading="lazy">
-          <img src="assets/academy-pix/gradseniors.jpg" alt="Graduating seniors" loading="lazy">
-          <img src="assets/academy-pix/staff.jpg" alt="Academy staff" loading="lazy">
-          <img src="assets/academy-pix/groupofthree.jpg" alt="Group of three friends" loading="lazy">
-          <img src="assets/academy-pix/adamandkristen.jpg" alt="Adam and Kristen" loading="lazy">
-          <img src="assets/academy-pix/aprilacceptance.jpg" alt="April’s acceptance" loading="lazy">
-          <img src="assets/academy-pix/brianrebekah2.jpg" alt="Brian and Rebekah" loading="lazy">
-          <img src="assets/academy-pix/brittanyflute.jpg" alt="Brittany with her flute" loading="lazy">
-          <img src="assets/academy-pix/colgatelamb.jpg" alt="Colgate and Lamb" loading="lazy">
-          <img src="assets/academy-pix/deepaacceptance.jpg" alt="Deepa’s acceptance" loading="lazy">
-          <img src="assets/academy-pix/finch.jpg" alt="Finch" loading="lazy">
-          <img src="assets/academy-pix/hemphill.jpg" alt="Hemphill" loading="lazy">
-          <img src="assets/academy-pix/jiles.jpg" alt="Jiles" loading="lazy">
-          <img src="assets/academy-pix/lamb.jpg" alt="Lamb" loading="lazy">
-          <img src="assets/academy-pix/mike-and-katie.jpg" alt="Mike and Katie" loading="lazy">
-          <img src="assets/academy-pix/sethna.jpg" alt="Sethna" loading="lazy">
-          <img src="assets/academy-pix/TerriDucker.jpg" alt="Terri Ducker" loading="lazy">
-          <img src="assets/academy-pix/5f440853d07ea.image.jpg" alt="Academy photo" loading="lazy">
+        <div class="card pix-cta">
+          <p class="h3 serif">Got pics? Add them.</p>
+          <div class="btns">
+            <a class="sbtn" href="https://photos.app.goo.gl/zRSka3QCoRucrTJQA" target="_blank" rel="noopener">Upload a photo</a>
+            <a class="obtn" href="https://photos.app.goo.gl/zRSka3QCoRucrTJQA" target="_blank" rel="noopener">Browse the album</a>
+          </div>
         </div>
-        <p class="pix-empty">Photos coming soon.</p>
       </section>
 
       <!-- 06 FAQ -->
@@ -307,6 +293,6 @@
   <div class="np-bar"><span>🔊 Area Codes – Ludacris</span><button class="np-close" type="button" aria-label="Stop and close">×</button></div>
   <div class="np-video"></div>
 </div>
-<script src="script.js?v=10"></script>
+<script src="script.js?v=11"></script>
 </body>
 </html>
