@@ -131,6 +131,12 @@ lightbox.addEventListener('touchend', (e) => {
   touchX = null;
 });
 
+// Attendees: on touch screens, tapping a photo flips between then and now (if there's a now photo).
+document.querySelectorAll('#attendees .avatar').forEach((a) => {
+  if (!a.querySelector('.now')) return;
+  a.addEventListener('click', () => a.closest('.person').classList.toggle('show-now'));
+});
+
 // RSVP: submit to Formspree without leaving the page.
 const form = document.querySelector('.rsvp-form');
 const status = form.querySelector('.form-status');

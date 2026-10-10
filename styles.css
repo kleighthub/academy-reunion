@@ -168,6 +168,13 @@ a { color: inherit; }
 .people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 16px; }
 .person { text-align: center; }
 .person img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px; }
+/* Then/now avatars: the "now" photo fades in on hover, or on tap (.show-now) on phones */
+.avatar { position: relative; width: 140px; height: 140px; margin: 0 auto 10px; }
+.avatar img { position: absolute; inset: 0; margin: 0; transition: opacity .25s ease; }
+.avatar .now { opacity: 0; }
+.avatar:has(.now) { cursor: pointer; }
+@media (hover: hover) { .person:hover .avatar .now { opacity: 1; } }
+.person.show-now .avatar .now { opacity: 1; }
 .name { font-weight: 600; font-size: 16px; }
 .role { color: var(--muted); font-size: 14px; line-height: 1.35; }
 
@@ -244,6 +251,7 @@ legend { font-weight: 600; font-size: 14px; margin-bottom: 8px; width: 100%; }
   .people { grid-template-columns: repeat(2, 1fr); }
   .memories { columns: 1; }
   .person img { width: 112px; height: 112px; }
+  .avatar { width: 112px; height: 112px; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .wide-photo { aspect-ratio: 3 / 2; }

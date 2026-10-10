@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=37">
+  <link rel="stylesheet" href="styles.css?v=38">
 </head>
 <body>
 <div class="site">
@@ -184,9 +184,11 @@
       <!-- 04 ATTENDEES -->
       <section class="panel" id="attendees">
         <h2 class="ptitle serif">Attendees</h2>
+        <!-- Each person: a "then" photo, plus an optional "now" photo that swaps in on hover (or tap on phones).
+             To add a now photo: <img class="now" src="assets/attendees/NAME-now.jpg" alt="NAME today"> inside .avatar -->
         <div class="people">
-            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
-            <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
+            <div class="person"><div class="avatar"><img class="then" src="assets/attendees/kristen-turner-then.jpg" alt="Kristen Turner, then"></div><div class="name">Kristen Turner</div><div class="role">San Francisco</div></div>
+            <div class="person"><div class="avatar"><img class="then" src="assets/attendees/laura-maughan-then.jpg" alt="Laura Maughan, then"></div><div class="name">Laura Maughan</div><div class="role">Virginia</div></div>
             <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
             <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
             <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
@@ -316,6 +318,6 @@
   <div class="np-bar"><span>🔊 Area Codes – Ludacris</span><button class="np-close" type="button" aria-label="Stop and close">×</button></div>
   <div class="np-video"></div>
 </div>
-<script src="script.js?v=19"></script>
+<script src="script.js?v=20"></script>
 </body>
 </html>
