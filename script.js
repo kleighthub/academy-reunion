@@ -69,7 +69,10 @@ updateCountdown();
 setInterval(updateCountdown, 60 * 60 * 1000);
 
 // Easter egg: the banner's Start button opens Campus Quest in a full-screen overlay.
+// On phones and tablets the game opens as its own full page (in-page frames size badly on mobile browsers);
+// the game's EXIT button brings people back here.
 document.querySelector('.egg-start').addEventListener('click', (e) => {
+  if (matchMedia('(pointer: coarse)').matches) return; // let the link open campus-game/ as a normal page
   e.preventDefault();
   if (document.querySelector('.egg-overlay')) return;
   const f = document.createElement('iframe');
@@ -107,7 +110,7 @@ function showPhoto(i) {
   lbImg.src = img.dataset.full || img.currentSrc || img.src;
   lbImg.alt = img.alt;
 }
-for (const selector of ['#venue .cardimg, #venue .gallery img']) {
+for (const selector of ['#venue .cardimg, #venue .gallery img, #venue .wide-photo']) {
   const set = [...document.querySelectorAll(selector)];
   set.forEach((img, i) => img.addEventListener('click', () => { photos = set; showPhoto(i); lightbox.showModal(); }));
 }
@@ -131,6 +134,17 @@ lightbox.addEventListener('touchend', (e) => {
 // RSVP: submit to Formspree without leaving the page.
 const form = document.querySelector('.rsvp-form');
 const status = form.querySelector('.form-status');
+const done = document.querySelector('.rsvp-done');
+
+// Hotel: the "How many nights?" picker only appears (and only gets sent) when someone answers Yes.
+const nights = form.querySelector('.nights');
+form.querySelectorAll('input[name="hotel_interest"]').forEach((r) => r.addEventListener('change', () => {
+  const yes = form.querySelector('input[name="hotel_interest"]:checked')?.value === 'yes';
+  nights.hidden = !yes;
+  nights.querySelector('select').disabled = !yes;
+}));
+form.addEventListener('reset', () => { nights.hidden = true; nights.querySelector('select').disabled = true; });
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (form.action.includes('YOUR_FORM_ID')) {
@@ -147,8 +161,20 @@ form.addEventListener('submit', async (e) => {
       headers: { Accept: 'application/json' },
     });
     if (!res.ok) throw new Error();
+    // Swap the form for a big confirmation card.
+    const data = new FormData(form);
+    const first = (data.get('first_name') || '').toString().trim();
+    const notComing = data.get('attending') === 'no';
+    done.querySelector('.done-going').hidden = notComing; // no Venmo nudge or "See ya" for people who can't come
+    done.querySelector('.done-not').hidden = !notComing;
+    done.querySelector('.done-sign').textContent = data.get('attending') === 'maybe' ? 'Maayyybeee see you in June.' : 'See ya in June.';
+    done.querySelector('.done-title').textContent = first ? `We got your RSVP, ${first}!` : 'We got your RSVP!';
     form.reset();
-    status.textContent = 'Thanks! Your RSVP is in.';
+    status.textContent = '';
+    form.hidden = true;
+    done.hidden = false;
+    done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    done.focus({ preventScroll: true });
   } catch {
     status.textContent = 'Something went wrong. Please try again.';
   } finally {

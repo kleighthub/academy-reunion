@@ -38,6 +38,8 @@ a { color: inherit; }
 }
 /* Easter egg: the banner's Start button opens Campus Quest (campus-game/) in a full-screen overlay */
 .egg-start { position: absolute; left: calc(8 / 2360 * 100%); top: calc(424 / 472 * 100%); width: calc(130 / 2360 * 100%); height: calc(42 / 472 * 100%); cursor: pointer; }
+/* The drawn Start button is tiny on phones; give it a finger-sized tap target */
+@media (pointer: coarse) { .egg-start { top: auto; bottom: 0; min-width: 44px; min-height: 30px; } }
 .egg-overlay { position: fixed; inset: 0; z-index: 1000; width: 100vw; height: 100vh; border: 0; background: #12091f; }
 /* "Academy Pix" folder icon in the banner art opens the photo gallery */
 .banner-pix { position: absolute; left: calc(2190 / 2360 * 100%); top: calc(176 / 472 * 100%); width: calc(145 / 2360 * 100%); height: calc(112 / 472 * 100%); cursor: pointer; }
@@ -135,7 +137,8 @@ a { color: inherit; }
 .two > .cardimg { height: calc(100% - 20px); }
 .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 20px; }
 .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); }
-#venue .cardimg, .gallery img { cursor: zoom-in; }
+.wide-photo { width: 100%; aspect-ratio: 12 / 5; object-fit: cover; object-position: center 55%; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 20px; }
+#venue .cardimg, .gallery img, .wide-photo { cursor: zoom-in; }
 
 /* Academy Pix: call to action that links out to the shared album */
 .pix-cta { max-width: 760px; }
@@ -199,12 +202,23 @@ a { color: inherit; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 fieldset { border: 0; display: flex; gap: 24px; flex-wrap: wrap; }
 legend { font-weight: 600; font-size: 14px; margin-bottom: 8px; width: 100%; }
-.form-hint { margin-top: -8px; font-size: 14px; color: var(--body); }
-.form-hint a { color: var(--accent); font-weight: 600; }
+.rsvp-form .nights { display: flex; align-items: center; gap: 10px; font-weight: 400; }
+.rsvp-form .nights select { width: auto; min-width: 80px; }
+.rsvp-form .field-note { font-weight: 400; font-size: 13px; color: var(--muted); }
 .rsvp-form label.inline { display: inline-flex; align-items: center; gap: 8px; font-weight: 400; }
 .sbtn { justify-self: start; background: var(--accent); color: #fff; border: 0; border-radius: 4px; padding: 12px 22px; font: 600 15px var(--sans); cursor: pointer; }
 .sbtn:hover { filter: brightness(.95); }
 .sbtn:disabled { opacity: .6; cursor: default; }
+/* RSVP confirmation (replaces the form after a successful send) */
+.rsvp-done { max-width: 760px; border-top: 6px solid var(--accent); padding: 40px 36px; text-align: center; outline: none; }
+.done-kicker { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 8px; }
+.done-title { font-size: 40px; line-height: 1.15; font-weight: 700; margin-bottom: 16px; }
+.done-body { font-size: 18px; color: var(--body); }
+.done-body a { color: var(--accent); font-weight: 600; }
+.done-sign { font-size: 26px; color: var(--ink) !important; margin: 18px 0 26px; }
+.rsvp-done .btns { justify-content: center; margin-bottom: 0; }
+.rsvp-done .sbtn { text-decoration: none; }
+.obtn { background: none; font-family: var(--sans); cursor: pointer; color: var(--ink); }
 .form-status { min-height: 1.4em; font-size: 14px; }
 .hp { position: absolute; left: -9999px; }
 
@@ -232,6 +246,7 @@ legend { font-weight: 600; font-size: 14px; margin-bottom: 8px; width: 100%; }
   .person img { width: 112px; height: 112px; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .wide-photo { aspect-ratio: 3 / 2; }
   .field-row { grid-template-columns: 1fr; }
   .card { padding: 20px; }
   .foot { padding: 6px 16px; }

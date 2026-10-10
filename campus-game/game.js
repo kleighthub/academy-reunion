@@ -230,12 +230,28 @@
       '......SSSSS.....', '.....PTTTTT.....', '.....PTTTTT.....', '.....PTTSTT.....', '.....PTTSTT.....', '......JJJJ......',
       '......JJJJ......', '......JJJJ......', '......KKKKK.....', '................'],
   };
-  function walkRows(dir, rows, step) {
+  // Long-hair, skirt variant (legs use the 'L' colour: skin for bare legs, or a tights colour).
+  const FRF = {
+    down: [
+      '................', '.....HHHHHH.....', '....HHHHHHHH....', '...HHSSSSSSHH...', '...HSSESSESSH...', '...HSSSSSSSSH...',
+      '...HHSSSSSSHH...', '...HTTTTTTTTH...', '...STTTTTTTTS...', '...STTTTTTTTS...', '....TTTTTTTT....', '...JJJJJJJJJJ...',
+      '....LLL..LLL....', '....LLL..LLL....', '....KKK..KKK....', '................'],
+    up: [
+      '................', '.....HHHHHH.....', '....HHHHHHHH....', '...HHHHHHHHHH...', '...HHHHHHHHHH...', '...HHHHHHHHHH...',
+      '...HHHHHHHHHH...', '...HTPPPPPPTH...', '...STPPPPPPTS...', '...STPPPPPPTS...', '....TPPPPPPT....', '...JJJJJJJJJJ...',
+      '....LLL..LLL....', '....LLL..LLL....', '....KKK..KKK....', '................'],
+    right: [
+      '................', '......HHHHH.....', '.....HHHHHHH....', '....HHHHSSSS....', '....HHHSSSES....', '....HHSSSSSSS...',
+      '....HHHSSSS.....', '....HHPTTTTT....', '.....PTTTTT.....', '.....PTTSTT.....', '.....PTTSTT.....', '.....JJJJJJ.....',
+      '......LLLL......', '......LLLL......', '......KKKKK.....', '................'],
+  };
+  function walkRows(dir, rows, step, leg = 'J') {
     const r = rows.slice();
+    const L = (s) => s.replace(/J/g, leg);
     if (dir === 'right') {
-      if (step) { r[12] = '.....JJ..JJ.....'; r[13] = '....JJ....JJ....'; r[14] = '...KK.....KKK...'; }
-    } else if (step === 1) { r[13] = '....KKK..JJJ....'; r[14] = '.........KKK....'; }
-    else if (step === 2) { r[13] = '....JJJ..KKK....'; r[14] = '....KKK.........'; }
+      if (step) { r[12] = L('.....JJ..JJ.....'); r[13] = L('....JJ....JJ....'); r[14] = '...KK.....KKK...'; }
+    } else if (step === 1) { r[13] = L('....KKK..JJJ....'); r[14] = '.........KKK....'; }
+    else if (step === 2) { r[13] = L('....JJJ..KKK....'); r[14] = '....KKK.........'; }
     return r;
   }
   function makeSprite(rows, pal, flip) {
@@ -256,10 +272,10 @@
     return c2;
   }
   function spriteSet(pal) {
-    const s = {};
-    for (const dir of ['down', 'up']) s[dir] = [0, 1, 2].map((st) => makeSprite(walkRows(dir, FR[dir], st), pal));
-    s.right = [0, 1].map((st) => makeSprite(walkRows('right', FR.right, st), pal));
-    s.left = [0, 1].map((st) => makeSprite(walkRows('right', FR.right, st), pal, true));
+    const s = {}, F = pal.female ? FRF : FR, leg = pal.female ? 'L' : 'J';
+    for (const dir of ['down', 'up']) s[dir] = [0, 1, 2].map((st) => makeSprite(walkRows(dir, F[dir], st, leg), pal));
+    s.right = [0, 1].map((st) => makeSprite(walkRows('right', F.right, st, leg), pal));
+    s.left = [0, 1].map((st) => makeSprite(walkRows('right', F.right, st, leg), pal, true));
     return s;
   }
   const PLAYER = spriteSet({ H: '#3a2416', S: '#f1c09a', E: '#1b1b1a', T: '#2bb3a3', P: '#ff7a3d', J: '#3d5fa8', K: '#f2f2f2' });
@@ -271,7 +287,15 @@
     { H: '#5a3a24', S: '#f6cfae', E: '#1b1b1a', T: '#7ac943', P: '#c83e7a', J: '#6b6f7a', K: '#222222' },
     { H: '#111111', S: '#e2a47e', E: '#1b1b1a', T: '#9b59d0', P: '#ff9a62', J: '#2f3f6e', K: '#f2f2f2' },
   ];
-  const NPC_SETS = NPC_PALS.map(spriteSet);
+  const NPC_PALS_F = [
+    { female: 1, H: '#2a1a12', S: '#c68a63', E: '#1b1b1a', T: '#ff7ab6', P: '#ff7ab6', J: '#3d5fa8', L: '#c68a63', K: '#f2f2f2' },
+    { female: 1, H: '#e8c65a', S: '#f6cfae', E: '#1b1b1a', T: '#2bb3a3', P: '#2bb3a3', J: '#2b2b33', L: '#2b2b33', K: '#222222' },
+    { female: 1, H: '#b84a1e', S: '#f1c09a', E: '#1b1b1a', T: '#ffd54a', P: '#ffd54a', J: '#c83e7a', L: '#f1c09a', K: '#9a6a3a' },
+    { female: 1, H: '#111111', S: '#8a5a3c', E: '#1b1b1a', T: '#9b59d0', P: '#9b59d0', J: '#5a6a8a', L: '#8a5a3c', K: '#f2f2f2' },
+    { female: 1, H: '#5a3a24', S: '#e2a47e', E: '#1b1b1a', T: '#f2f2f2', P: '#f2f2f2', J: '#e04848', L: '#2f3f6e', K: '#222222' },
+    { female: 1, H: '#7a4fd1', S: '#f6cfae', E: '#1b1b1a', T: '#1b1b1a', P: '#1b1b1a', J: '#ff9a62', L: '#1b1b1a', K: '#1b1b1a' },
+  ];
+  const NPC_SETS = NPC_PALS.flatMap((p, i) => [p, NPC_PALS_F[i]]).map(spriteSet);
   const PEACH = makeSprite([
     '................', '.......LL.......', '......LL........', '....OOOOOOO.....', '...OPPPPPPPO....', '..OPPPPPPPYYO...',
     '..OPPPPPPPYYO...', '..OPPPPPPYYYO...', '..OPPPPPYYYYO...', '...OPPPYYYYO....', '....OOOOOOO.....', '................',
@@ -290,10 +314,10 @@
   const player = { x: sx * TS + 8, y: sy * TS + 12, dir: 'down', t: 0, moving: false };
   const found = {};
   const LINES = [
-    'brb, Dawson\'s Creek is on.', 'Did you burn me that mix CD yet?', 'My pager keeps going off. 143!',
-    'Meet at the Z at six?', 'Somebody picked up the phone and killed my dial-up!', 'Y2K is gonna crash everything, I\'m telling you.',
-    'Napster says 3 hours left on this song.', 'Has anyone seen my Discman?', 'Away message: at the library, IM me.',
-    'Is it Thursday? Pizza night?', 'I have SO much reading for tomorrow.', 'Wanna walk to the Quad?',
+    'I don\'t think you\'re cut out for the decathlon.', 'Did you hear what happened after the Academy prom?', 'Wait, how old are you?',
+    'Wanna go to the Z?', 'I heard Barlow is pissed at you. What did you do?', 'Will you sign my name in the book tonight? I\'m gonna sneak out.',
+    'I stayed up all night studying for finals. I have not slept in 36 hours.', 'Do you have a car? Will you give me a ride?', 'Away message: at the library, IM me.',
+    'I don\'t know. I kind of like Thursday night dinners, honestly.', 'I have SO much reading for tomorrow.', 'Let\'s go sunbathe in the Quad.',
   ];
   const npcs = [];
   for (let i = 0; i < 14; i++) {
@@ -318,16 +342,40 @@
   addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
   cvs.addEventListener('pointerdown', () => { cvs.focus(); if (state === 'title') press('a'); });
   if ('ontouchstart' in window || navigator.maxTouchPoints > 0) document.body.classList.add('touch');
-  for (const b of document.querySelectorAll('#touch button')) {
+  // A and MAP: plain press-and-release buttons.
+  for (const b of document.querySelectorAll('#touch .ab button')) {
     const k = b.dataset.k;
-    b.addEventListener('pointerdown', (e) => { e.preventDefault(); b.setPointerCapture(e.pointerId); if (!keys[k]) press(k); keys[k] = true; });
+    b.addEventListener('pointerdown', (e) => { e.preventDefault(); if (!keys[k]) press(k); keys[k] = true; });
     const up = () => { keys[k] = false; };
-    b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('lostpointercapture', up);
+    b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('pointerleave', up);
   }
+  // D-pad: one touch area; the direction comes from where the thumb is relative to the pad's centre,
+  // so you can slide between directions without lifting.
+  const pad = document.querySelector('#touch .pad');
+  let padId = null;
+  function steer(e) {
+    const r = pad.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    const dead = r.width * 0.12;
+    keys.left = dx < -dead && Math.abs(dx) >= Math.abs(dy) * 0.5;
+    keys.right = dx > dead && Math.abs(dx) >= Math.abs(dy) * 0.5;
+    keys.up = dy < -dead && Math.abs(dy) >= Math.abs(dx) * 0.5;
+    keys.down = dy > dead && Math.abs(dy) >= Math.abs(dx) * 0.5;
+  }
+  function release() { padId = null; keys.left = keys.right = keys.up = keys.down = false; }
+  pad.addEventListener('pointerdown', (e) => {
+    e.preventDefault(); padId = e.pointerId;
+    try { pad.setPointerCapture(e.pointerId); } catch (err) { /* not all browsers allow capture */ }
+    steer(e);
+  });
+  pad.addEventListener('pointermove', (e) => { if (e.pointerId === padId) steer(e); });
+  pad.addEventListener('pointerup', (e) => { if (e.pointerId === padId) release(); });
+  pad.addEventListener('pointercancel', release);
   document.getElementById('close').addEventListener('click', closeGame);
   function closeGame() {
     if (window.parent !== window) { window.parent.postMessage({ type: 'campus-game:close' }, '*'); return; }
-    if (history.length > 1) history.back(); else location.href = '../';
+    // Opened as its own page (phones): go back to the site.
+    if (document.referrer.startsWith(location.origin) && history.length > 1) history.back(); else location.href = '../';
   }
 
   // ---------- sound ----------
@@ -600,15 +648,21 @@
 
   // ---------- canvas scaling ----------
   function fit() {
-    const maxW = innerWidth - 28, maxH = innerHeight - 28 - (document.body.classList.contains('touch') ? 170 : 0);
-    let s = Math.min(maxW / VW, Math.max(maxH, 160) / VH);
-    s = s >= 2 ? Math.floor(s) : Math.max(1, s);
+    const touch = document.body.classList.contains('touch'), landscape = innerWidth > innerHeight;
+    // On touch screens leave room for the controls: below the game in portrait, beside it in landscape.
+    const maxW = innerWidth - 28 - (touch && landscape ? 300 : 0);
+    const maxH = innerHeight - 28 - (touch && !landscape ? 190 : 0) - (touch ? 30 : 0);
+    let s = Math.min(maxW / VW, Math.max(maxH, 120) / VH);
+    s = s >= 2 ? Math.floor(s) : Math.max(0.6, s);
     cvs.style.width = Math.floor(VW * s) + 'px'; cvs.style.height = Math.floor(VH * s) + 'px';
-    if (document.body.classList.contains('touch')) document.body.style.alignItems = 'flex-start', document.getElementById('frame').style.marginTop = '24px';
+    if (touch) {
+      document.body.style.alignItems = landscape ? 'center' : 'flex-start';
+      document.getElementById('frame').style.marginTop = landscape ? '20px' : '56px';
+    }
   }
   addEventListener('resize', fit); fit();
 
-  window.__campusQuest = { player, found, press, targetComp, get state() { return state; }, get dialog() { return dialog; } }; // handy for testing
+  window.__campusQuest = { player, found, press, targetComp, npcSets: NPC_SETS, get state() { return state; }, get dialog() { return dialog; } }; // handy for testing
 
   let last = performance.now();
   function loop(now) {

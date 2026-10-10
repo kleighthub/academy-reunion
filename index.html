@@ -12,13 +12,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=37">
 </head>
 <body>
 <div class="site">
 
   <!-- Banner: assets/banner-home.png (2360 x 472, 5:1). A page can override it with data-banner on its section. -->
-  <div class="banner"><img src="assets/banner-home.png" alt="Academy 25-ish Year Reunion: a retro desktop window reading “Reconnecting anyone from 2000–2002… 25-ish years remaining”">
+  <div class="banner"><img src="assets/banner-home.png?v=3" alt="Academy 25-ish Year Reunion: a retro desktop window reading “Reconnecting anyone from 2000–2002… 25-ish years remaining”">
     <a class="banner-rsvp" href="#rsvp" aria-label="RSVP"></a>
     <button class="banner-music" type="button" aria-label="Play Area Codes by Ludacris"></button>
     <a class="egg-start" href="campus-game/" aria-label="Start: play Campus Quest"></a>
@@ -52,7 +52,7 @@
     <div class="wrap">
 
       <!-- 01 EVENT DETAILS -->
-      <section class="panel" id="details" data-banner="assets/banner-details.png" data-banner-alt="Hand-drawn Atlanta skyline at sunrise">
+      <section class="panel" id="details">
         <h2 class="ptitle serif">Event Details</h2>
         <p class="intro">Skyline views | Reserved rooftop lounge | Food and drinks included</p>
         <div class="two">
@@ -92,11 +92,8 @@
         <h2 class="ptitle serif">RSVP</h2>
         <p class="intro">Please respond by April 1, 2027.</p>
         <p class="note ticket-note"><strong>Tickets are $50.</strong> RSVPing isn’t enough: you must also buy a ticket by Venmoing $50 to Kristen Turner.<br>Venmo: <a href="https://venmo.com/u/kleight" target="_blank" rel="noopener">@kleight</a><br><span class="fine-note">*Doing materially well in life? Please consider Venmoing more. This event will cost ~$6,000, and the deposit was $3,000. Kristen is fronting this bill.</span><br><span class="fine-note">**Don’t have Venmo? Let us know in your RSVP and we’ll contact you to collect payment another way.</span></p>
-        <!--
-          RSVP SETUP: replace YOUR_FORM_ID below with your Formspree form ID
-          (free at https://formspree.io). See README.md.
-        -->
-        <form class="card rsvp-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <!-- RSVPs go to Formspree form meaekevk (formspree.io dashboard + email). See README.md. -->
+        <form class="card rsvp-form" action="https://formspree.io/f/meaekevk" method="POST">
           <div class="field-row">
             <label>First name<input name="first_name" required autocomplete="given-name"></label>
             <label>Last name<input name="last_name" required autocomplete="family-name"></label>
@@ -111,17 +108,42 @@
             <label class="inline"><input type="radio" name="attending" value="no"> No</label>
             <label class="inline"><input type="radio" name="attending" value="maybe"> Maybe</label>
           </fieldset>
-          <label>Share a memory or shenanigan (optional)<textarea name="memory" rows="4" placeholder="That time we…"></textarea></label>
-          <p class="form-hint">Have a photo to go with it? <a href="https://photos.app.goo.gl/zRSka3QCoRucrTJQA" target="_blank" rel="noopener">Add it to our shared Google Photos album</a>.</p>
+          <fieldset class="hotel">
+            <legend>Are you interested in staying at the Glenn Hotel?</legend>
+            <label class="inline"><input type="radio" name="hotel_interest" value="yes"> Yes</label>
+            <label class="inline"><input type="radio" name="hotel_interest" value="no"> No</label>
+            <label class="nights" hidden>How many nights?
+              <select name="hotel_nights" disabled>
+                <option>1</option><option>2</option><option>3</option><option>4+</option>
+              </select>
+            </label>
+          </fieldset>
+          <label>Where do you live now?
+            <input name="location" autocomplete="address-level2" placeholder="City, State or Country">
+            <span class="field-note">This will display on the Attendees page.</span>
+          </label>
           <label>Anything we should know?<textarea name="notes" rows="4"></textarea></label>
+          <label>Share a memory or shenanigan<textarea name="memory" rows="4"></textarea></label>
           <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="sbtn" type="submit">Send RSVP</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
+        <div class="card rsvp-done" tabindex="-1" role="status" hidden>
+          <p class="done-kicker">RSVP received</p>
+          <h3 class="done-title serif">We got your RSVP!</h3>
+          <div class="done-going">
+            <p class="done-body">Be sure to Venmo Kristen <strong>$50</strong> at <a href="https://venmo.com/u/kleight" target="_blank" rel="noopener">@kleight</a>.</p>
+            <p class="done-body done-sign serif">See ya in June.</p>
+            <div class="btns">
+              <a class="sbtn" href="https://venmo.com/u/kleight" target="_blank" rel="noopener">Open Venmo</a>
+            </div>
+          </div>
+          <p class="done-body done-not">We’ll miss you!</p>
+        </div>
       </section>
 
       <!-- 03 VENUE & MENU -->
-      <section class="panel" id="venue" data-banner="assets/venue/venue-feature-wide.jpg" data-banner-alt="SkyLounge at Glenn rooftop seating with the Atlanta skyline" data-banner-pos="center 50%">
+      <section class="panel" id="venue">
         <h2 class="ptitle serif">Venue &amp; Menu</h2>
         <div class="two">
           <div class="card">
@@ -144,6 +166,7 @@
           <img src="assets/venue/venue-deck-web.jpg" alt="Rooftop deck at dusk with the Atlanta skyline" loading="lazy">
           <img src="assets/venue/venue-banner.webp" alt="SkyLounge sign and seating area at dusk" loading="lazy">
         </div>
+        <img class="wide-photo" src="assets/venue/venue-feature-wide.jpg" alt="SkyLounge rooftop seating with the Atlanta skyline at golden hour" loading="lazy">
         <h2 class="ptitle serif menu-title">Menu</h2>
         <p class="menu-sub">Fully catered food and drinks included.</p>
         <div class="two">
@@ -293,6 +316,6 @@
   <div class="np-bar"><span>🔊 Area Codes – Ludacris</span><button class="np-close" type="button" aria-label="Stop and close">×</button></div>
   <div class="np-video"></div>
 </div>
-<script src="script.js?v=11"></script>
+<script src="script.js?v=19"></script>
 </body>
 </html>
