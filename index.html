@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=38">
+  <link rel="stylesheet" href="styles.css?v=43">
 </head>
 <body>
 <div class="site">
@@ -54,7 +54,7 @@
       <!-- 01 EVENT DETAILS -->
       <section class="panel" id="details">
         <h2 class="ptitle serif">Event Details</h2>
-        <p class="intro">Skyline views | Reserved rooftop lounge | Food and drinks included</p>
+        <p class="intro shimmer">Skyline views | Reserved rooftop lounge | Food and drinks included</p>
         <div class="two">
           <div class="card has-icon">
             <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>
@@ -71,7 +71,7 @@
             </div>
           </div>
         </div>
-        <h2 class="ptitle serif menu-title">Sunday family-friendly event</h2>
+        <h2 class="ptitle serif menu-title">Separate family-friendly event</h2>
         <p class="menu-sub">Optional. Bring your plus-ones, your babies, your children, your cousins, your pets, etc.</p>
         <div class="two">
           <div class="card has-icon">
@@ -119,10 +119,15 @@
             </label>
           </fieldset>
           <label>Where do you live now?
-            <input name="location" autocomplete="address-level2" placeholder="City, State or Country">
             <span class="field-note">This will display on the Attendees page.</span>
+            <input name="location" autocomplete="address-level2" placeholder="City, State or Country">
           </label>
-          <label>Anything we should know?<textarea name="notes" rows="4"></textarea></label>
+          <fieldset>
+            <legend>Are you interested in volunteering to help?
+              <span class="field-note">We have a list of possible tasks that we’ll email out to volunteers in February.</span></legend>
+            <label class="inline"><input type="radio" name="volunteer" value="yes"> Yes</label>
+            <label class="inline"><input type="radio" name="volunteer" value="no"> No</label>
+          </fieldset>
           <label>Share a memory or shenanigan<textarea name="memory" rows="4"></textarea></label>
           <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="sbtn" type="submit">Send RSVP</button>
@@ -187,7 +192,7 @@
         <!-- Each person: a "then" photo, plus an optional "now" photo that swaps in on hover (or tap on phones).
              To add a now photo: <img class="now" src="assets/attendees/NAME-now.jpg" alt="NAME today"> inside .avatar -->
         <div class="people">
-            <div class="person"><div class="avatar"><img class="then" src="assets/attendees/kristen-turner-then.jpg" alt="Kristen Turner, then"></div><div class="name">Kristen Turner</div><div class="role">San Francisco</div></div>
+            <div class="person"><div class="avatar"><img class="then" src="assets/attendees/kristen-turner-then.jpg" alt="Kristen Turner, then"><img class="now" src="assets/attendees/kristen-turner-now.jpg" alt="Kristen Turner, now" style="object-position: 50% 35%"></div><div class="name">Kristen Turner</div><div class="role">San Francisco</div></div>
             <div class="person"><div class="avatar"><img class="then" src="assets/attendees/laura-maughan-then.jpg" alt="Laura Maughan, then"></div><div class="name">Laura Maughan</div><div class="role">Virginia</div></div>
             <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>
             <div class="person"><img src="assets/avatar.svg" alt=""><div class="name">First Lastname</div><div class="role">Lorem ipsum dolor</div></div>

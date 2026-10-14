@@ -87,6 +87,15 @@ a { color: inherit; }
 .wrap { padding: 56px 64px 40px; }
 .ptitle { font-size: 44px; font-weight: 700; line-height: 1.1; margin-bottom: 36px; }
 .menu-title { font-size: 34px; margin: 44px 0 8px; padding-top: 44px; border-top: 1px solid var(--line); }
+/* Event Details tagline: chrome WordArt-style shimmer that sweeps slowly left to right */
+.intro.shimmer { /* beats .intro's plain text colour */
+  font: 700 19px var(--sans); letter-spacing: .01em;
+  background: linear-gradient(100deg, #1d3fa8 0%, #5f9bff 20%, #c9d6ee 30%, #ff0016 45%, #1d3fa8 60%, #5f9bff 80%, #c9d6ee 90%, #ff0016 100%);
+  background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 14s linear infinite;
+}
+@keyframes shimmer { from { background-position: 300% 0; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .intro.shimmer { animation: none; } }
 .menu-sub { color: var(--body); margin-bottom: 24px; } /* same size as .intro */
 .menu-title + .day, .menu-title + .two { margin-top: 24px; }
 .h3 { font-family: var(--serif); font-size: 22px; font-weight: 600; margin-bottom: 14px; color: var(--ink); }
@@ -169,11 +178,11 @@ a { color: inherit; }
 .person { text-align: center; }
 .person img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px; }
 /* Then/now avatars: the "now" photo fades in on hover, or on tap (.show-now) on phones */
-.avatar { position: relative; width: 140px; height: 140px; margin: 0 auto 10px; }
+.avatar { position: relative; width: 140px; height: 140px; margin: 0 auto 10px; border-radius: 50%; } /* round, so the hover area is the circle itself */
 .avatar img { position: absolute; inset: 0; margin: 0; transition: opacity .25s ease; }
 .avatar .now { opacity: 0; }
 .avatar:has(.now) { cursor: pointer; }
-@media (hover: hover) { .person:hover .avatar .now { opacity: 1; } }
+@media (hover: hover) { .avatar:hover .now { opacity: 1; } } /* only when the pointer is inside the circle */
 .person.show-now .avatar .now { opacity: 1; }
 .name { font-weight: 600; font-size: 16px; }
 .role { color: var(--muted); font-size: 14px; line-height: 1.35; }
@@ -200,7 +209,7 @@ a { color: inherit; }
 .ticket-note { max-width: 760px; margin: 0 0 20px; color: var(--body); border-left: 4px solid var(--accent); }
 .ticket-note a { color: var(--accent); font-weight: 600; }
 .ticket-note .fine-note { display: inline-block; margin-top: 6px; color: var(--muted); font-size: 13px; font-style: italic; }
-.rsvp-form { display: grid; gap: 18px; max-width: 760px; }
+.rsvp-form { display: grid; gap: 30px; max-width: 760px; }
 .rsvp-form label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; color: var(--ink); }
 .rsvp-form input:not([type="radio"]), .rsvp-form select, .rsvp-form textarea {
   width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--soft); font: 400 15px var(--sans); color: var(--ink);
@@ -212,6 +221,7 @@ legend { font-weight: 600; font-size: 14px; margin-bottom: 8px; width: 100%; }
 .rsvp-form .nights { display: flex; align-items: center; gap: 10px; font-weight: 400; }
 .rsvp-form .nights select { width: auto; min-width: 80px; }
 .rsvp-form .field-note { font-weight: 400; font-size: 13px; color: var(--muted); }
+legend .field-note { display: block; margin-top: 2px; }
 .rsvp-form label.inline { display: inline-flex; align-items: center; gap: 8px; font-weight: 400; }
 .sbtn { justify-self: start; background: var(--accent); color: #fff; border: 0; border-radius: 4px; padding: 12px 22px; font: 600 15px var(--sans); cursor: pointer; }
 .sbtn:hover { filter: brightness(.95); }
